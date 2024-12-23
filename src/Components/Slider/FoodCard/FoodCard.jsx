@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   return (
-    <div className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2">
+    <div className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 hover:duration-700">
       <div className="w-full relative">
         <img
           className="w-full h-full object-cover"
           src={food.photo}
           alt="Image"
         />
-        <div className="absolute top-[86%] left-[2%] bg-white py-0.5 px-3 rounded-sm text-sm font-semibold">
-          <GiForkKnifeSpoon className="inline-flex bg-custom-orange text-white text-lg" />{" "}
+        <div className="absolute top-[86%] left-[2%] bg-white py-0.5 px-3 rounded-sm text-sm font-semibold flex items-center gap-2">
+          <GiForkKnifeSpoon className="bg-custom-orange text-white text-lg" />{" "}
           {food.name}
         </div>
       </div>

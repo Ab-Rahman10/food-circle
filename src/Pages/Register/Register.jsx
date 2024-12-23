@@ -20,7 +20,7 @@ const Register = () => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
 
     if (!passwordRegex.test(pass)) {
-      setErrorMessage(
+      return setErrorMessage(
         "Password must be at least 6 characters long and include at least one uppercase letter and one lowercase letter."
       );
     }
