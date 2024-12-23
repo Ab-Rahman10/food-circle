@@ -1,41 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../Hooks/Context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { setUser, loginUser, googleSignIn } = useAuth();
   const navigate = useNavigate();
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.target;
     const email = form.email.value;
     const pass = form.pass.value;
-    const userInfo = { email, pass };
 
-    loginUser(email, pass)
-      .then((result) => {
-        console.log(result.user);
-        setUser(result.user);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log("ERROR", err);
-      });
+    try {
+      await loginUser(email, pass);
+      navigate("/");
+      toast.success("You have logged in successfully. Enjoy your session!");
+    } catch (err) {
+      console.log(err);
+      toast.error("Invalid email or password. Please try again.");
+    }
   };
 
   //   google sign in
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        setUser(result.user);
-        console.log(result.user);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log("ERROR", error);
-      });
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn().then((res) => setUser(res.user));
+      toast.success("Logged in with Google successfully. Welcome!");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error("Google login failed. Please try again.");
+    }
   };
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -107,6 +105,12 @@ const Login = () => {
             />
             Sign in with Google
           </button>
+        </div>
+        <div className="text-sm text-center mt-5">
+          Don't have an account?{" "}
+          <Link className="underline" to="/register">
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
 
   //   create user
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -32,11 +33,13 @@ const AuthProvider = ({ children }) => {
 
   //   login
   const loginUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //   user logout
   const logoutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -56,11 +59,13 @@ const AuthProvider = ({ children }) => {
 
   //   google sign in
   const googleSignIn = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   const authInfo = {
     user,
+    loading,
     setUser,
     createUser,
     loginUser,

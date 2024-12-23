@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../Hooks/Context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { setUser, createUser, googleSignIn, userProfileUpdate } = useAuth();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
@@ -14,29 +16,38 @@ const Register = () => {
     const email = form.email.value;
     const pass = form.pass.value;
 
+    // password validation
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+
+    if (!passwordRegex.test(pass)) {
+      setErrorMessage(
+        "Password must be at least 6 characters long and include at least one uppercase letter and one lowercase letter."
+      );
+    }
+
     try {
       const result = await createUser(email, pass);
       // update profile
       await userProfileUpdate(name, photo);
       setUser({ ...result.user, photoURL: photo, displayName: name });
-      console.log(result.user);
       navigate("/");
+      toast.success("Account created successfully. ");
     } catch (err) {
-      console.log("ERROR", error);
+      console.log("ERROR", err);
+      toast.error("Registration failed. Please try again later.");
     }
   };
 
   //   google sign in
-  const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        setUser(result.user);
-        console.log(result.user);
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log("ERROR", error);
-      });
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+      navigate("/");
+      toast.success("Logged in with Google successfully. Welcome!");
+    } catch (error) {
+      console.log("ERROR", error);
+      toast.error("Google login failed. Please try again.");
+    }
   };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -111,6 +122,9 @@ const Register = () => {
               className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-500 focus:border-orange-500"
               placeholder="Enter your password"
             />
+            {errorMessage && (
+              <span className="text-xs text-red-500">{errorMessage}</span>
+            )}
           </div>
 
           {/* Register Button */}
@@ -138,6 +152,12 @@ const Register = () => {
             />
             Sign in with Google
           </button>
+        </div>
+        <div className="text-sm text-center mt-5">
+          Already have an account?{" "}
+          <Link className="underline" to="/login">
+            Sign In
+          </Link>
         </div>
       </div>
     </div>
