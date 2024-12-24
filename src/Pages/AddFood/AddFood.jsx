@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../Hooks/Context";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { format } from "date-fns";
 
 const AddFood = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -125,7 +126,7 @@ const AddFood = () => {
               </label>
               <DatePicker
                 selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => setStartDate(format(new Date(date), "P"))}
                 required
                 className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
               />
