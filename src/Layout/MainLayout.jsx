@@ -9,7 +9,10 @@ const MainLayout = () => {
       <section className="2xl:w-10/12 mx-auto">
         <Navbar></Navbar>
       </section>
-      <section className="min-h-[calc(100vh - 401px)]">
+      <section
+        className="min-h-screen"
+        style={{ minHeight: `calc(100vh - 64px - 353px)` }}
+      >
         <Outlet></Outlet>
       </section>
       <Footer></Footer>
