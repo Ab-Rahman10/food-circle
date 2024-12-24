@@ -21,24 +21,48 @@ const FoodDetails = () => {
     donator,
     notes,
   } = foodDetails;
-  console.log(foodDetails);
 
   const handleOpenModal = async (id) => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_URL}/food/${id}`
-    );
-
-    console.log(data);
+    // get data from details to dialog box
+    // await axios.get(`${import.meta.env.VITE_API_URL}/food/${id}`);
 
     document.getElementById("my_modal_5").showModal();
   };
 
-  const handleRequest = async (id) => {
-    const { data } = await axios.patch(
-      `${import.meta.env.VITE_API_URL}/requestFoods/${id}`,
-      { status: "Requested" }
-    );
-    console.log(data);
+  const handleRequest = async (e) => {
+    e.preventDefault();
+
+    photo;
+    const donarName = donator?.donatorName;
+    const pickupLocation = location;
+    expiredDate;
+    const requestDate = e.target.requestDate.value;
+    const note = e.target.notes.value;
+    const userEmail = user?.email;
+    const reqData = {
+      photo,
+      donarName,
+      pickupLocation,
+      expiredDate,
+      requestDate,
+      note,
+      userEmail,
+    };
+
+    try {
+      // send data to server
+      await axios.post(`${import.meta.env.VITE_API_URL}/food-request`, reqData);
+
+      await axios.patch(`${import.meta.env.VITE_API_URL}/requestFoods/${_id}`, {
+        status: "Requested",
+      });
+
+      // close the modal
+      document.getElementById("my_modal_5").close();
+      navigate("/myFood-request");
+    } catch (err) {
+      console.log("Request Error", err);
+    }
   };
 
   return (
@@ -114,7 +138,7 @@ const FoodDetails = () => {
               <h3 className="font-bold text-lg mb-4 text-center text-custom-orange">
                 Request Food
               </h3>
-              <form className="w-full">
+              <form onSubmit={handleRequest} className="w-full">
                 {/* Food Name */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -180,6 +204,7 @@ const FoodDetails = () => {
                     Request Date
                   </label>
                   <input
+                    name="requestDate"
                     type="text"
                     value={format(new Date(), "P")}
                     readOnly
@@ -216,25 +241,23 @@ const FoodDetails = () => {
                     Additional Notes
                   </label>
                   <textarea
+                    required
+                    name="notes"
                     placeholder="Add any additional notes here..."
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
                   ></textarea>
                 </div>
+                {/* Modal Action Buttons */}
+                <div className="modal-action">
+                  {/* Request Button */}
+                  <button
+                    className="bg-custom-orange py-2 px-5 rounded-md text-white"
+                    type="submit"
+                  >
+                    Request
+                  </button>
+                </div>
               </form>
-              {/* Modal Action Buttons */}
-              <div className="modal-action">
-                {/* Request Button */}
-                <button
-                  onClick={() => {
-                    document.getElementById("my_modal_5").close();
-                    handleRequest(_id);
-                  }}
-                  className="bg-custom-orange py-2 px-5 rounded-md text-white"
-                  type="submit"
-                >
-                  Request
-                </button>
-              </div>
             </div>
           </dialog>
         </div>
@@ -243,7 +266,7 @@ const FoodDetails = () => {
       {/* Go Back Button */}
       <Link to="/available-foods" className="order-2 lg:order-1">
         <button className="px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 flex items-center">
-          <BsArrowLeft className="mr-2" /> Go back to available foods
+          <BsArrowLeft className="mr-2" /> Go back to Available foods
         </button>
       </Link>
     </div>

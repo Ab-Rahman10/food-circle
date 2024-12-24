@@ -48,7 +48,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="/my-requests"
+                href="/myFood-request"
                 className="hover:underline hover:text-orange-500"
               >
                 My Food Requests
