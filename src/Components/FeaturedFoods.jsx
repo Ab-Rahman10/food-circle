@@ -43,6 +43,11 @@ const FeaturedFoods = () => {
                 src={food.photo}
                 alt="Image"
               />
+              <div className="bg-orange-500 absolute right-0 top-4 rounded-tl-md rounded-bl-md p-2 text-white text-xs">
+                <p className="text-xs font-semibold">
+                  Quantity: {food.quantity}
+                </p>
+              </div>
               <div className="absolute top-[86%] left-[2%] bg-white py-0.5 px-3 rounded-sm text-sm font-semibold flex items-center gap-2">
                 <GiForkKnifeSpoon className="bg-custom-orange text-white text-lg" />{" "}
                 {food.name}

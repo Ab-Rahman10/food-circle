@@ -6,7 +6,6 @@ const AvailableFoods = () => {
   const [foods, setFoods] = useState([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
-  console.log(sort);
 
   useEffect(() => {
     const fetchingAvailableFoods = async () => {
@@ -15,7 +14,6 @@ const AvailableFoods = () => {
           `${import.meta.env.VITE_API_URL}/foods?search=${search}&sort=${sort}`
         );
         setFoods(data);
-        console.log(data);
       } catch (err) {
         console.log(err.message);
       }
@@ -92,7 +90,7 @@ const AvailableFoods = () => {
       </div>
 
       {/* Foods Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {foods.map((food) => (
           <FoodCard key={food._id} food={food}></FoodCard>
         ))}

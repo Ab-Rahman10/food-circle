@@ -1,12 +1,17 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { BsArrowLeft } from "react-icons/bs";
+import axios from "axios";
+import useAuth from "../../Hooks/Context";
 
 const FoodDetails = () => {
   const foodDetails = useLoaderData();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const {
+    _id,
     name,
     photo,
     quantity,
@@ -16,6 +21,25 @@ const FoodDetails = () => {
     donator,
     notes,
   } = foodDetails;
+  console.log(foodDetails);
+
+  const handleOpenModal = async (id) => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}/food/${id}`
+    );
+
+    console.log(data);
+
+    document.getElementById("my_modal_5").showModal();
+  };
+
+  const handleRequest = async (id) => {
+    const { data } = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/requestFoods/${id}`,
+      { status: "Requested" }
+    );
+    console.log(data);
+  };
 
   return (
     <div className="flex flex-col items-center lg:w-9/12 mx-auto px-4 space-y-4 lg:space-y-0 lg:space-x-4 lg:flex-row gap-5">
@@ -73,10 +97,146 @@ const FoodDetails = () => {
 
           {/* Request Button */}
           <div className="mt-6">
-            <button className="w-full px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
+            <button
+              onClick={() => handleOpenModal(_id)}
+              className="w-full px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+            >
               Request
             </button>
           </div>
+
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <dialog
+            id="my_modal_5"
+            className="modal modal-bottom sm:modal-middle"
+          >
+            <div className="modal-box">
+              <h3 className="font-bold text-lg mb-4 text-center text-custom-orange">
+                Request Food
+              </h3>
+              <form className="w-full">
+                {/* Food Name */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Food name
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* Food Image */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Food Image
+                  </label>
+                  <img
+                    src={photo}
+                    alt="Food"
+                    className="w-full h-32 object-cover rounded-md border border-gray-300"
+                  />
+                </div>
+                {/* Food Donator Email */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Donator Email
+                  </label>
+                  <input
+                    type="email"
+                    value={donator?.donatorEmail}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* Food Donator Name */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Donator Name
+                  </label>
+                  <input
+                    type="text"
+                    value={donator?.donatorName}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* User Email */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    value={user?.email}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* Request Date */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Request Date
+                  </label>
+                  <input
+                    type="text"
+                    value={format(new Date(), "P")}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* Pickup Location */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Pickup Location
+                  </label>
+                  <input
+                    type="text"
+                    value={location}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* Expire Date */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Expire Date
+                  </label>
+                  <input
+                    type="text"
+                    value={format(new Date(expiredDate), "P")}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none"
+                  />
+                </div>
+                {/* Additional Notes */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Additional Notes
+                  </label>
+                  <textarea
+                    placeholder="Add any additional notes here..."
+                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                  ></textarea>
+                </div>
+              </form>
+              {/* Modal Action Buttons */}
+              <div className="modal-action">
+                {/* Request Button */}
+                <button
+                  onClick={() => {
+                    document.getElementById("my_modal_5").close();
+                    handleRequest(_id);
+                  }}
+                  className="bg-custom-orange py-2 px-5 rounded-md text-white"
+                  type="submit"
+                >
+                  Request
+                </button>
+              </div>
+            </div>
+          </dialog>
         </div>
       </div>
 
