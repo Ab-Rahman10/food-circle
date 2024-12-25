@@ -43,11 +43,10 @@ const MyFoodRequest = () => {
           <tbody>
             {reqFoods.map((food, idx) => (
               <tr key={food._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-4">{idx + 1}</td> {/* Serial number */}
+                <td className="px-4 py-4">{idx + 1}</td>
                 <td className="px-4 py-4 w-16 h-16">
                   <img
                     src={food.photo}
-                    alt="Food"
                     className="w-full h-full object-cover rounded-md"
                   />
                 </td>

@@ -6,10 +6,12 @@ import useAuth from "../../Hooks/Context";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const AddFood = () => {
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleFoodSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +42,7 @@ const AddFood = () => {
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/foods`, addData);
       toast.success("Your food has been successfully added!");
+      navigate("/available-foods");
     } catch (err) {
       console.log("ERROR", err);
     }

@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/Context";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
 
 const ManageMyFoods = () => {
   const [manageFoods, setManageFoods] = useState([]);
@@ -15,13 +16,37 @@ const ManageMyFoods = () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/food-manage/${email}`
       );
-      console.log(data);
       setManageFoods(data);
     };
     fetchingManageFoods();
   }, []);
 
   // Delete food
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // deleting
+        await axios.delete(`${import.meta.env.VITE_API_URL}/delete-food/${id}`);
+        const foodsAfterDelete = [...manageFoods].filter(
+          (food) => food._id !== id
+        );
+        setManageFoods(foodsAfterDelete);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your food has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
 
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
@@ -52,7 +77,6 @@ const ManageMyFoods = () => {
                 <td className="px-4 py-4 w-16 h-16">
                   <img
                     src={food.photo}
-                    alt="Food"
                     className="w-full h-full object-cover rounded-md"
                   />
                 </td>
@@ -69,7 +93,7 @@ const ManageMyFoods = () => {
                     </button>
                   </Link>
                   <button
-                    onClick={handleDelete}
+                    onClick={() => handleDelete(food._id)}
                     className="bg-red-500 text-white px-4 py-2 rounded"
                   >
                     Delete
