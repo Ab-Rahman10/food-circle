@@ -7,9 +7,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { compareAsc, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { axiosSecure } from "../../Hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const AddFood = () => {
+  const axiosSecure = UseAxiosSecure();
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const navigate = useNavigate();

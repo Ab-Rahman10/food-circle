@@ -4,9 +4,10 @@ import useAuth from "../../Hooks/Context";
 import { format } from "date-fns";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { axiosSecure } from "../../Hooks/UseAxiosSecure";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const MyFoodRequest = () => {
+  const axiosSecure = UseAxiosSecure();
   const { user } = useAuth();
   const [reqFoods, setReqFoods] = useState([]);
   const currentUser = user?.email;
