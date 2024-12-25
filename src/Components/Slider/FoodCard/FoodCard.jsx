@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   return (
-    <div className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 hover:duration-700">
+    <div className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 hover:duration-200">
       <div className="w-full relative">
         <img
           className="w-full h-full object-cover"

@@ -8,12 +8,22 @@ import toast from "react-hot-toast";
 import { compareAsc, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
 
 const AddFood = () => {
   const axiosSecure = UseAxiosSecure();
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: async (addData) => {
+      await axiosSecure.post(`/foods`, addData);
+    },
+    onSuccess: () => {
+      toast.success("Your food has been successfully added!");
+      navigate("/available-foods");
+    },
+  });
 
   const handleFoodSubmit = async (e) => {
     e.preventDefault();
@@ -48,9 +58,7 @@ const AddFood = () => {
     }
 
     try {
-      await axiosSecure.post(`/foods`, addData);
-      toast.success("Your food has been successfully added!");
-      navigate("/available-foods");
+      await mutateAsync(addData);
     } catch (err) {
       console.log("ERROR", err);
     }
@@ -103,6 +111,7 @@ const AddFood = () => {
                 Donator Email
               </label>
               <input
+                readOnly
                 defaultValue={user?.email}
                 name="donatorEmail"
                 type="email"
@@ -165,7 +174,7 @@ const AddFood = () => {
             type="submit"
             className="px-5 py-2 bg-orange-500 text-white font-medium rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
-            Submit
+            {isPending ? "Save..." : "Save"}
           </button>
         </div>
       </form>
@@ -174,73 +183,3 @@ const AddFood = () => {
 };
 
 export default AddFood;
-
-{
-  /* Food Status */
-}
-{
-  /* <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Food Status
-          </label>
-          <select
-            name="foodStatus"
-            className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500"
-          >
-            <option value="available">Available</option>
-            <option value="not-available">Not Available</option>
-          </select>
-        </div> */
-}
-
-{
-  /* Donator Photo URL */
-}
-{
-  /* <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Donator Photo URL
-          </label>
-          <input
-            name="donatorPhoto"
-            type="text"
-            placeholder="Enter donator photo URL"
-            className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div> */
-}
-
-{
-  /* Donator Name */
-}
-{
-  /* <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Donator Name
-          </label>
-          <input
-            name="donatorName"
-            type="text"
-            placeholder="Enter donator name"
-            className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div> */
-}
-
-{
-  /* Donator Email */
-}
-{
-  /* <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Donator Email
-          </label>
-          <input
-            defaultValue={user?.email}
-            name="donatorEmail"
-            type="email"
-            placeholder="Enter donator email"
-            className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div> */
-}

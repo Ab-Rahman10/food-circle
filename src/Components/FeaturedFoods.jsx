@@ -1,25 +1,31 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { BsArrowRight } from "react-icons/bs";
+import { useQuery } from "@tanstack/react-query";
 
 const FeaturedFoods = () => {
-  const [featuredFoods, setFeaturedFoods] = useState([]);
+  // Using Tanstack query---------------------------------------------
+  const { data: featuredFoods, isLoading } = useQuery({
+    queryKey: ["foods"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/all-foods`
+      );
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    const fetchingAllFoods = async () => {
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_API_URL}/all-foods`
-        );
-        setFeaturedFoods(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchingAllFoods();
-  }, []);
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+        <span className="loading loading-spinner text-secondary"></span>
+        <span className="loading loading-spinner text-accent"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
       <div className="mt-10">
@@ -35,7 +41,7 @@ const FeaturedFoods = () => {
         {featuredFoods.map((food) => (
           <div
             key={food._id}
-            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 hover:duration-700"
+            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 hover:duration-200"
           >
             <div className="w-full relative">
               <img
