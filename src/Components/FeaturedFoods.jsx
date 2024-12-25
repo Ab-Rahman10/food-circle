@@ -23,7 +23,7 @@ const FeaturedFoods = () => {
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
       <div className="mt-10">
-        <h2 className="text-2xl font-bold text-center ">Featured foods</h2>
+        <h2 className="text-3xl font-bold text-center ">Featured foods</h2>
         <p className="text-center text-sm mt-2 text-gray-500">
           Discover our curated selection of featured foods, handpicked for their
           quality, flavor, and freshness. <br className="hidden lg:block" />{" "}

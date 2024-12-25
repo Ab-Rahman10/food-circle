@@ -83,34 +83,31 @@ const AvailableFoods = () => {
             <option value="dsc">Descending</option>
           </select>
           {/* Reset */}
-          <button
-            onClick={handleReset}
-            className="btn bg-custom-orange text-white hover:bg-orange-700 px-4 py-2 rounded-md"
-          >
-            Reset
-          </button>
-        </div>
-      </div>
-      <div className="flex items-center gap-3 my-5 p-3 shadow-md">
-        {/* <h2 className="text-lg font-semibold">Change the Grid layout</h2> */}
-        <div>
-          {gridView ? (
+          <div className="flex gap-2 items-center">
             <button
-              className="font-semibold bg-custom-orange text-white p-2 rounded-md"
-              onClick={() => setGridView(!gridView)}
+              onClick={handleReset}
+              className="btn bg-custom-orange text-white hover:bg-orange-700 px-4 py-2 rounded-md"
             >
-              <TfiLayoutGrid3Alt className="text-xl md:text-2xl lg:text-3xl inline-flex" />{" "}
-              Grid
+              Reset
             </button>
-          ) : (
-            <button
-              className="font-semibold bg-custom-orange text-white p-2 rounded-md"
-              onClick={() => setGridView(!gridView)}
-            >
-              <IoGridSharp className="text-xl md:text-2xl lg:text-3xl inline-flex" />{" "}
-              Grid
-            </button>
-          )}
+            <div className="hidden lg:block">
+              {gridView ? (
+                <button
+                  className="font-semibold bg-custom-orange text-white p-2 rounded-md flex items-center gap-2"
+                  onClick={() => setGridView(!gridView)}
+                >
+                  <TfiLayoutGrid3Alt className="text-3xl" /> Grid
+                </button>
+              ) : (
+                <button
+                  className="font-semibold bg-custom-orange text-white p-2 rounded-md flex items-center gap-2"
+                  onClick={() => setGridView(!gridView)}
+                >
+                  <IoGridSharp className="text-3xl inline-flex" /> Grid
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 

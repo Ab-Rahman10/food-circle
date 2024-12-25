@@ -12,7 +12,8 @@ const MyFoodRequest = () => {
   useEffect(() => {
     const fetchingReqFoods = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/my-request/${currentUser}`
+        `${import.meta.env.VITE_API_URL}/my-request/${currentUser}`,
+        { withCredentials: true }
       );
       setReqFoods(data);
     };

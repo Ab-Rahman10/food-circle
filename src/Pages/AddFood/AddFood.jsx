@@ -46,7 +46,9 @@ const AddFood = () => {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/foods`, addData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/foods`, addData, {
+        withCredentials: true,
+      });
       toast.success("Your food has been successfully added!");
       navigate("/available-foods");
     } catch (err) {

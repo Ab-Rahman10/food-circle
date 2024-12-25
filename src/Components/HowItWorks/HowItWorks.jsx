@@ -5,7 +5,7 @@ const HowItWorks = () => {
     <section className="py-12 my-5 w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <motion.h2
-          className="text-2xl font-bold mb-6"
+          className="text-3xl font-bold mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

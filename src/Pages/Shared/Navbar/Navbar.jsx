@@ -29,36 +29,40 @@ const Navbar = () => {
           Available Foods
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? `font-bold border-b-2 border-custom-orange` : ""
-          }
-          to="/add-food"
-        >
-          Add food
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? `font-bold border-b-2 border-custom-orange` : ""
-          }
-          to="/manage-myFoods"
-        >
-          Manage my foods
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? `font-bold border-b-2 border-custom-orange` : ""
-          }
-          to="/myFood-request"
-        >
-          My food request
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `font-bold border-b-2 border-custom-orange` : ""
+              }
+              to="/add-food"
+            >
+              Add food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `font-bold border-b-2 border-custom-orange` : ""
+              }
+              to="/manage-myFoods"
+            >
+              Manage my foods
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `font-bold border-b-2 border-custom-orange` : ""
+              }
+              to="/myFood-request"
+            >
+              My food request
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 

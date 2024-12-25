@@ -14,7 +14,10 @@ const ManageMyFoods = () => {
   useEffect(() => {
     const fetchingManageFoods = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/food-manage/${email}`
+        `${import.meta.env.VITE_API_URL}/food-manage/${email}`,
+        {
+          withCredentials: true,
+        }
       );
       setManageFoods(data);
     };
