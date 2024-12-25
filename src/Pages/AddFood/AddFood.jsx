@@ -48,9 +48,7 @@ const AddFood = () => {
     }
 
     try {
-      await axiosSecure.post(`/foods`, addData, {
-        withCredentials: true,
-      });
+      await axiosSecure.post(`/foods`, addData);
       toast.success("Your food has been successfully added!");
       navigate("/available-foods");
     } catch (err) {

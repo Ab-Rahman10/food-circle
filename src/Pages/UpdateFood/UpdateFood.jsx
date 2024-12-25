@@ -1,10 +1,11 @@
-import axios from "axios";
 import { format } from "date-fns";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const UpdateFood = () => {
   const updateData = useLoaderData();
   const navigate = useNavigate();
+  const axiosSecure = UseAxiosSecure();
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -33,10 +34,7 @@ const UpdateFood = () => {
     };
 
     // update food
-    await axios.put(
-      `${import.meta.env.VITE_API_URL}/update-food/${updateData._id}`,
-      collectedData
-    );
+    await axiosSecure.put(`/update-food/${updateData._id}`, collectedData);
     navigate("/manage-myFoods");
   };
 

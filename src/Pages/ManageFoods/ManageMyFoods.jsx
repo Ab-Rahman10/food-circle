@@ -15,9 +15,7 @@ const ManageMyFoods = () => {
 
   useEffect(() => {
     const fetchingManageFoods = async () => {
-      const { data } = await axiosSecure.get(`/food-manage/${email}`, {
-        withCredentials: true,
-      });
+      const { data } = await axiosSecure.get(`/food-manage/${email}`);
       setManageFoods(data);
     };
     fetchingManageFoods();
@@ -36,7 +34,7 @@ const ManageMyFoods = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         // deleting
-        await axios.delete(`${import.meta.env.VITE_API_URL}/delete-food/${id}`);
+        await axiosSecure.delete(`/delete-food/${id}`);
         const foodsAfterDelete = [...manageFoods].filter(
           (food) => food._id !== id
         );

@@ -4,8 +4,10 @@ import { format } from "date-fns";
 import { BsArrowLeft } from "react-icons/bs";
 import axios from "axios";
 import useAuth from "../../Hooks/Context";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const FoodDetails = () => {
+  const axiosSecure = UseAxiosSecure();
   const foodDetails = useLoaderData();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -51,9 +53,9 @@ const FoodDetails = () => {
 
     try {
       // send data to server
-      await axios.post(`${import.meta.env.VITE_API_URL}/food-request`, reqData);
+      await axiosSecure.post(`/food-request`, reqData);
 
-      await axios.patch(`${import.meta.env.VITE_API_URL}/requestFoods/${_id}`, {
+      await axiosSecure.patch(`/requestFoods/${_id}`, {
         status: "Requested",
       });
 
