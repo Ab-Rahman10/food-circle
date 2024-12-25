@@ -7,6 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { compareAsc, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { axiosSecure } from "../../Hooks/UseAxiosSecure";
 
 const AddFood = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -46,7 +47,7 @@ const AddFood = () => {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/foods`, addData, {
+      await axiosSecure.post(`/foods`, addData, {
         withCredentials: true,
       });
       toast.success("Your food has been successfully added!");

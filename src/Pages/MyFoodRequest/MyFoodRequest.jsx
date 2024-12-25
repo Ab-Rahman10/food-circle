@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/Context";
 import { format } from "date-fns";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { axiosSecure } from "../../Hooks/UseAxiosSecure";
 
 const MyFoodRequest = () => {
   const { user } = useAuth();
@@ -11,10 +12,9 @@ const MyFoodRequest = () => {
   const currentUser = user?.email;
   useEffect(() => {
     const fetchingReqFoods = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/my-request/${currentUser}`,
-        { withCredentials: true }
-      );
+      const { data } = await axiosSecure.get(`/my-request/${currentUser}`, {
+        withCredentials: true,
+      });
       setReqFoods(data);
     };
 

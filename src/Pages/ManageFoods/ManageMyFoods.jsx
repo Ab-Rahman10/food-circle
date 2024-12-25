@@ -5,20 +5,19 @@ import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
+import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 
 const ManageMyFoods = () => {
+  const axiosSecure = UseAxiosSecure();
   const [manageFoods, setManageFoods] = useState([]);
   const { user } = useAuth();
   const email = user?.email;
 
   useEffect(() => {
     const fetchingManageFoods = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/food-manage/${email}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/food-manage/${email}`, {
+        withCredentials: true,
+      });
       setManageFoods(data);
     };
     fetchingManageFoods();
