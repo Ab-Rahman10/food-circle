@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-white text-gray-700">
@@ -6,13 +8,12 @@ const Footer = () => {
         <div>
           {/* Logo Section */}
           <div className="mb-4">
-            <img
-              src="/path-to-your-logo.png"
-              alt="Food Circle Logo"
-              className="h-12 w-auto"
-            />
+            <Link to="/" className="text-xl">
+              <h2 className="text-xl font-black font-Kavivanar text-custom-orange">
+                <span className="font-black text-2xl">F</span>ood Circle
+              </h2>
+            </Link>
           </div>
-          <h3 className="text-xl font-bold text-orange-500">Food Circle</h3>
           <p className="mt-2 text-sm">
             Sharing food, spreading happiness. Join us in making a difference in
             your community by sharing surplus food with those in need.
