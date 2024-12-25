@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../Hooks/Context";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { format } from "date-fns";
+import { compareAsc, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 const AddFood = () => {
@@ -38,6 +38,12 @@ const AddFood = () => {
       donator: { donatorName, donatorEmail, donatorPhoto },
       status: "available",
     };
+
+    // validation the expire date
+    const result = compareAsc(new Date(), new Date(startDate));
+    if (result === 1) {
+      return toast.error("The expiration date must be in the future.");
+    }
 
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/foods`, addData);

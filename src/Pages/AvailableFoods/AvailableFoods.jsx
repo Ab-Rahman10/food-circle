@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FoodCard from "../../Components/Slider/FoodCard/FoodCard";
+import { TfiLayoutGrid3Alt } from "react-icons/tfi";
+import { IoGridSharp } from "react-icons/io5";
 
 const AvailableFoods = () => {
   const [foods, setFoods] = useState([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [gridView, setGridView] = useState(true);
 
   useEffect(() => {
     const fetchingAvailableFoods = async () => {
@@ -41,7 +44,7 @@ const AvailableFoods = () => {
       </div>
 
       {/* Filter Section */}
-      <div className="flex flex-col lg:flex-row md:justify-between md:items-center gap-5 mb-10 p-5 rounded-lg shadow-md">
+      <div className="flex flex-col lg:flex-row md:justify-between md:items-center gap-5 p-5 rounded-lg shadow-md">
         <div>
           <h3 className="text-lg font-semibold text-gray-700">
             Search & Sort by Expire Date
@@ -88,9 +91,35 @@ const AvailableFoods = () => {
           </button>
         </div>
       </div>
+      <div className="flex items-center gap-3 my-5 p-3 shadow-md">
+        {/* <h2 className="text-lg font-semibold">Change the Grid layout</h2> */}
+        <div>
+          {gridView ? (
+            <button
+              className="font-semibold bg-custom-orange text-white p-2 rounded-md"
+              onClick={() => setGridView(!gridView)}
+            >
+              <TfiLayoutGrid3Alt className="text-xl md:text-2xl lg:text-3xl inline-flex" />{" "}
+              Grid
+            </button>
+          ) : (
+            <button
+              className="font-semibold bg-custom-orange text-white p-2 rounded-md"
+              onClick={() => setGridView(!gridView)}
+            >
+              <IoGridSharp className="text-xl md:text-2xl lg:text-3xl inline-flex" />{" "}
+              Grid
+            </button>
+          )}
+        </div>
+      </div>
 
       {/* Foods Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 ${
+          gridView ? "lg:grid-cols-3" : "lg:grid-cols-2"
+        } gap-5`}
+      >
         {foods.map((food) => (
           <FoodCard key={food._id} food={food}></FoodCard>
         ))}
