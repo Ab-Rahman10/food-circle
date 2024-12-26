@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import spoonLottieData from "../../../assets/lottie/spoon.json";
+import Lottie from "lottie-react";
 
 const Footer = () => {
   return (
@@ -7,12 +9,13 @@ const Footer = () => {
         {/* Column 1 */}
         <div>
           {/* Logo Section */}
-          <div className="mb-4">
+          <div className="mb-4 flex items-center">
             <Link to="/" className="text-xl">
               <h2 className="text-xl font-black font-Kavivanar text-custom-orange">
                 <span className="font-black text-2xl">F</span>ood Circle
               </h2>
             </Link>
+            <Lottie className="w-20" animationData={spoonLottieData}></Lottie>
           </div>
           <p className="mt-2 text-sm">
             Sharing food, spreading happiness. Join us in making a difference in

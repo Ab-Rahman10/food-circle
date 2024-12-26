@@ -1,7 +1,8 @@
-import React, { useState } from "react";
 import useAuth from "../../Hooks/Context";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import loginLottieData from "../../assets/lottie/login.json";
+import Lottie from "lottie-react";
 
 const Login = () => {
   const { setUser, loginUser, googleSignIn } = useAuth();
@@ -36,7 +37,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center w-11/12 md:w-11/12 lg:w-9/12 mx-auto">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
         <h2 className="mb-6 text-center text-2xl font-bold text-orange-500">
           Sign In
@@ -112,6 +113,9 @@ const Login = () => {
             Sign Up
           </Link>
         </div>
+      </div>
+      <div className="hidden md:block w-[600px]">
+        <Lottie animationData={loginLottieData}></Lottie>
       </div>
     </div>
   );

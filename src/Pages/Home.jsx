@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "../Components/Slider/Slider";
 import FeaturedFoods from "../Components/FeaturedFoods";
 import OurImpact from "../Components/OurImpact/OurImpact";
-import HowItWorks from "../Components/HowItWorks/HowItWorks";
+import SeasonalFeast from "../Components/HowItWorks/SeasonalFeast";
 
 const Home = () => {
   return (
@@ -10,7 +10,7 @@ const Home = () => {
       <Slider />
       <FeaturedFoods />
       <OurImpact></OurImpact>
-      <HowItWorks></HowItWorks>
+      <SeasonalFeast></SeasonalFeast>
     </div>
   );
 };

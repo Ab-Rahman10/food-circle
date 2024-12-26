@@ -41,7 +41,7 @@ const FeaturedFoods = () => {
         {featuredFoods.map((food) => (
           <div
             key={food._id}
-            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 hover:duration-200"
+            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 transition-all duration-300"
           >
             <div className="w-full relative">
               <img

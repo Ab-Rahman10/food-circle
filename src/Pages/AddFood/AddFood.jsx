@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../Hooks/Context";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { compareAsc, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const AddFood = () => {
   const axiosSecure = UseAxiosSecure();
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  // Tanstack mutation
+  const queryClient = useQueryClient();
   const { isPending, mutateAsync } = useMutation({
     mutationFn: async (addData) => {
       await axiosSecure.post(`/foods`, addData);
@@ -22,6 +23,7 @@ const AddFood = () => {
     onSuccess: () => {
       toast.success("Your food has been successfully added!");
       navigate("/available-foods");
+      queryClient.invalidateQueries({ queryKey: ["foods"] });
     },
   });
 

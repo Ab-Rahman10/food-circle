@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import useAuth from "../../Hooks/Context";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import registerLottieData from "../../assets/lottie/register.json";
+import Lottie from "lottie-react";
 
 const Register = () => {
   const { setUser, createUser, googleSignIn, userProfileUpdate } = useAuth();
@@ -50,7 +52,7 @@ const Register = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen w-11/12 md:w-11/12 lg:w-9/12 mx-auto">
       <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-center text-orange-500">
           Register
@@ -159,6 +161,9 @@ const Register = () => {
             Sign In
           </Link>
         </div>
+      </div>
+      <div className="hidden md:block w-96">
+        <Lottie animationData={registerLottieData}></Lottie>
       </div>
     </div>
   );

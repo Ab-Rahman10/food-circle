@@ -5,20 +5,32 @@ import { format } from "date-fns";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const MyFoodRequest = () => {
   const axiosSecure = UseAxiosSecure();
   const { user } = useAuth();
-  const [reqFoods, setReqFoods] = useState([]);
   const currentUser = user?.email;
-  useEffect(() => {
-    const fetchingReqFoods = async () => {
-      const { data } = await axiosSecure.get(`/my-request/${currentUser}`);
-      setReqFoods(data);
-    };
 
-    fetchingReqFoods();
-  }, [currentUser]);
+  // using tanstack query
+  const { data: reqFoods, isLoading } = useQuery({
+    queryKey: ["foods"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/my-request/${currentUser}`);
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+        <span className="loading loading-spinner text-secondary"></span>
+        <span className="loading loading-spinner text-accent"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
       <div className="mt-10 mb-5">
