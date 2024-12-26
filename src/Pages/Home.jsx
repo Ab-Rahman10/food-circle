@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "../Components/Slider/Slider";
 import FeaturedFoods from "../Components/FeaturedFoods";
 import OurImpact from "../Components/OurImpact/OurImpact";
@@ -10,9 +9,9 @@ const Home = () => {
     <div>
       <Slider />
       <FeaturedFoods />
+      <FoodDiscovery></FoodDiscovery>
       <OurImpact></OurImpact>
       <SeasonalFeast></SeasonalFeast>
-      <FoodDiscovery></FoodDiscovery>
     </div>
   );
 };
