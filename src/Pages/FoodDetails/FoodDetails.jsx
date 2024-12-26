@@ -5,6 +5,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import axios from "axios";
 import useAuth from "../../Hooks/Context";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
+import toast from "react-hot-toast";
 
 const FoodDetails = () => {
   const axiosSecure = UseAxiosSecure();
@@ -62,8 +63,9 @@ const FoodDetails = () => {
       // close the modal
       document.getElementById("my_modal_5").close();
       navigate("/myFood-request");
+      toast.success("Requested");
     } catch (err) {
-      console.log("Request Error", err);
+      // console.log("Request Error", err);
     }
   };
 

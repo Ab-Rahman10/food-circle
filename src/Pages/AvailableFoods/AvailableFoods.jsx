@@ -18,7 +18,7 @@ const AvailableFoods = () => {
         );
         setFoods(data);
       } catch (err) {
-        console.log(err.message);
+        // console.log(err.message);
       }
     };
 

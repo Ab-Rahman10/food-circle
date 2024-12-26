@@ -62,7 +62,7 @@ const AddFood = () => {
     try {
       await mutateAsync(addData);
     } catch (err) {
-      console.log("ERROR", err);
+      // console.log("ERROR", err);
     }
   };
 

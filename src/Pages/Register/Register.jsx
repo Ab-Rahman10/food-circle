@@ -35,7 +35,7 @@ const Register = () => {
       navigate("/");
       toast.success("Account created successfully. ");
     } catch (err) {
-      console.log("ERROR", err);
+      // console.log("ERROR", err);
       toast.error("Registration failed. Please try again later.");
     }
   };
@@ -47,7 +47,7 @@ const Register = () => {
       navigate("/");
       toast.success("Logged in with Google successfully. Welcome!");
     } catch (error) {
-      console.log("ERROR", error);
+      // console.log("ERROR", error);
       toast.error("Google login failed. Please try again.");
     }
   };

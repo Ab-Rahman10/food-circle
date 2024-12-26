@@ -20,7 +20,7 @@ const Login = () => {
       navigate("/");
       toast.success("You have logged in successfully. Enjoy your session!");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error("Invalid email or password. Please try again.");
     }
   };
@@ -32,7 +32,7 @@ const Login = () => {
       toast.success("Logged in with Google successfully. Welcome!");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error("Google login failed. Please try again.");
     }
   };
