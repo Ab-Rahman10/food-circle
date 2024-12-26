@@ -27,7 +27,7 @@ const FeaturedFoods = () => {
   }
 
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
+    <div className="w-11/12   lg:w-9/12 mx-auto">
       <div className="mt-10">
         <h2 className="text-3xl font-bold text-center ">Featured foods</h2>
         <p className="text-center text-sm mt-2 text-gray-500">
@@ -41,11 +41,11 @@ const FeaturedFoods = () => {
         {featuredFoods.map((food) => (
           <div
             key={food._id}
-            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 transition-all duration-300"
+            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 "
           >
             <div className="w-full relative">
               <img
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover hover:scale-105 transition-all duration-300"
                 src={food.photo}
                 alt="Image"
               />

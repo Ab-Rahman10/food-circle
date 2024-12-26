@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import spoonLottieData from "../../../assets/lottie/spoon.json";
 import Lottie from "lottie-react";
+import logo from "../../../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -9,12 +10,15 @@ const Footer = () => {
         {/* Column 1 */}
         <div>
           {/* Logo Section */}
-          <div className="mb-4 flex items-center">
+          <div className="mb-4 flex items-center gap-2">
             <Link to="/" className="text-xl">
               <h2 className="text-xl font-black font-Kavivanar text-custom-orange">
                 <span className="font-black text-2xl">F</span>ood Circle
               </h2>
             </Link>
+            <div className="w-10">
+              <img src={logo} alt="logo" />
+            </div>
             <Lottie className="w-20" animationData={spoonLottieData}></Lottie>
           </div>
           <p className="mt-2 text-sm">

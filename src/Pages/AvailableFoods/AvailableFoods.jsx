@@ -30,7 +30,7 @@ const AvailableFoods = () => {
     setSort("");
   };
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
+    <div className="w-11/12   lg:w-9/12 mx-auto">
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-center mt-10">

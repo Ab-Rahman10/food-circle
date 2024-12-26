@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const OurImpact = () => {
   return (
-    <section className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-12 my-5">
+    <section className="w-11/12   lg:w-9/12 mx-auto py-12 my-5">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Animated Heading */}
         <motion.h2

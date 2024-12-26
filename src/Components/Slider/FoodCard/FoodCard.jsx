@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 const FoodCard = ({ food }) => {
   return (
-    <div className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 hover:scale-105 transition-all duration-200">
+    <div className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 ">
       <div className="w-full relative">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover hover:scale-105 transition-all duration-200"
           src={food.photo}
           alt="Image"
         />

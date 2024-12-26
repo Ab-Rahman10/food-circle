@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/Context";
 import { FaUser } from "react-icons/fa";
+import logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
@@ -100,11 +101,16 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <Link to="/" className="text-xl">
-          <h2 className="text-xl font-black font-Kavivanar text-custom-orange">
-            <span className="font-black text-2xl">F</span>ood Circle
-          </h2>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link to="/" className="text-xl">
+            <h2 className="text-xl font-black font-Kavivanar text-custom-orange">
+              <span className="font-black text-2xl">F</span>ood Circle
+            </h2>
+          </Link>
+          <div className="w-10">
+            <img src={logo} alt="logo" />
+          </div>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu-horizontal px-1 space-x-8">

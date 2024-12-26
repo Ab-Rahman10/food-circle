@@ -32,7 +32,7 @@ const MyFoodRequest = () => {
   }
 
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
+    <div className="w-11/12   lg:w-9/12 mx-auto">
       <div className="mt-10 mb-5">
         <h2 className="text-2xl font-bold text-center">My Requested foods</h2>
         <p className="text-center text-sm mt-2 text-gray-500">
