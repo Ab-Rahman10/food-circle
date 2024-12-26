@@ -30,7 +30,7 @@ const SeasonalFeast = () => {
   ];
 
   return (
-    <section className="seasonal-feast py-12 bg-gradient-to-r from-orange-100 to-yellow-200">
+    <section className="seasonal-feast py-12 bg-gradient-to-tr from-white via-orange-100">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
           Seasonal Feast: What's Fresh & Trending

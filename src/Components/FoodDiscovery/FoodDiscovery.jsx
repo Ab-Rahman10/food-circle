@@ -32,7 +32,7 @@ const FoodDiscovery = () => {
                 src="https://i.ibb.co.com/0JYkJTT/pexels-photo-376464.jpg"
               />
             </motion.div>
-            <div className="flex items-center gap-10">
+            <div className="flex items-center">
               <motion.div
                 animate={{ x: [-30, -50, -30] }}
                 transition={{ duration: 5, delay: 1, repeat: Infinity }}
@@ -43,8 +43,8 @@ const FoodDiscovery = () => {
                 />
               </motion.div>
               <motion.div
-                animate={{ x: [-30, -50, -30] }}
-                transition={{ duration: 5, delay: 1, repeat: Infinity }}
+                animate={{ x: [20, 50, 20] }}
+                transition={{ duration: 5, delay: 2, repeat: Infinity }}
                 className="text-5xl text-blue-600"
               >
                 {" "}

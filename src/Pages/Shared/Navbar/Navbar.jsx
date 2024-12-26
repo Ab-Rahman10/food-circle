@@ -103,7 +103,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-2">
           <Link to="/" className="text-xl">
-            <h2 className="text-xl font-black font-Kavivanar text-custom-orange">
+            <h2 className="text-xl font-black font-Kavivanar text-custom-orange whitespace-nowrap">
               <span className="font-black text-2xl">F</span>ood Circle
             </h2>
           </Link>
@@ -139,12 +139,12 @@ const Navbar = () => {
         <div className="navbar-end space-x-2">
           <FaUser className="text-xl md:text-2xl"></FaUser>
           <Link to="/register">
-            <button className="bg-lime-400 py-1 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
+            <button className="bg-lime-400 py-1.5 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
               Sign Up
             </button>
           </Link>
           <Link to="/login">
-            <button className="bg-custom-orange py-1 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
+            <button className="bg-custom-orange py-1.5 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
               Login
             </button>
           </Link>
