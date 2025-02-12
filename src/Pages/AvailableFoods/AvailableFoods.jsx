@@ -13,12 +13,9 @@ const AvailableFoods = () => {
   const [gridView, setGridView] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  // Initialize AOS
   useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
+    AOS.init({ duration: 800 });
 
-  useEffect(() => {
     const fetchingAvailableFoods = async () => {
       try {
         const { data } = await axios.get(
@@ -26,9 +23,9 @@ const AvailableFoods = () => {
         );
         setFoods(data);
         setLoading(false);
+        AOS.refresh();
       } catch (err) {
-        // console.log(err.message);
-        setLoading(false); // Even if there's an error, stop loading
+        setLoading(false);
       }
     };
 
@@ -51,9 +48,9 @@ const AvailableFoods = () => {
   }
 
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto" data-aos="fade-up">
+    <div className="w-11/12 lg:w-9/12 mx-auto">
       {/* Header */}
-      <div data-aos="fade-down">
+      <div>
         <h2 className="text-2xl font-bold text-center mt-10">
           Available Foods
         </h2>
@@ -65,10 +62,7 @@ const AvailableFoods = () => {
       </div>
 
       {/* Filter Section */}
-      <div
-        className="flex flex-col lg:flex-row md:justify-between md:items-center gap-5 p-5 rounded-lg shadow-md"
-        data-aos="fade-right"
-      >
+      <div className="flex flex-col lg:flex-row md:justify-between md:items-center gap-5 p-5 rounded-lg shadow-md">
         <div>
           <h3 className="text-lg font-semibold text-gray-700">
             Search & Sort by Expire Date
@@ -140,10 +134,11 @@ const AvailableFoods = () => {
         className={`grid grid-cols-1 md:grid-cols-2 ${
           gridView ? "lg:grid-cols-3" : "lg:grid-cols-2"
         } gap-5`}
-        data-aos="fade-up"
       >
         {foods.map((food) => (
-          <FoodCard key={food._id} food={food}></FoodCard>
+          <div data-aos="fade-up" key={food._id}>
+            <FoodCard food={food}></FoodCard>
+          </div>
         ))}
       </div>
     </div>
