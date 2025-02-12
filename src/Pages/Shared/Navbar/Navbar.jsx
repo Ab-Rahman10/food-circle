@@ -29,6 +29,16 @@ const Navbar = () => {
           Available Foods
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? `font-bold border-b-2 border-custom-orange` : ""
+          }
+          to="/aboutUs"
+        >
+          About Us
+        </NavLink>
+      </li>
       {user && (
         <>
           <li>
