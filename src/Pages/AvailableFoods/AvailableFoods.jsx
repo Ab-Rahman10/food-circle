@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import FoodCard from "../../Components/Slider/FoodCard/FoodCard";
 import { TfiLayoutGrid3Alt } from "react-icons/tfi";
 import { IoGridSharp } from "react-icons/io5";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AvailableFoods = () => {
   const [foods, setFoods] = useState([]);
@@ -10,6 +12,11 @@ const AvailableFoods = () => {
   const [sort, setSort] = useState("");
   const [gridView, setGridView] = useState(true);
   const [loading, setLoading] = useState(true);
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   useEffect(() => {
     const fetchingAvailableFoods = async () => {
@@ -44,9 +51,9 @@ const AvailableFoods = () => {
   }
 
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto">
+    <div className="w-11/12 lg:w-9/12 mx-auto" data-aos="fade-up">
       {/* Header */}
-      <div>
+      <div data-aos="fade-down">
         <h2 className="text-2xl font-bold text-center mt-10">
           Available Foods
         </h2>
@@ -58,7 +65,10 @@ const AvailableFoods = () => {
       </div>
 
       {/* Filter Section */}
-      <div className="flex flex-col lg:flex-row md:justify-between md:items-center gap-5 p-5 rounded-lg shadow-md">
+      <div
+        className="flex flex-col lg:flex-row md:justify-between md:items-center gap-5 p-5 rounded-lg shadow-md"
+        data-aos="fade-right"
+      >
         <div>
           <h3 className="text-lg font-semibold text-gray-700">
             Search & Sort by Expire Date
@@ -130,6 +140,7 @@ const AvailableFoods = () => {
         className={`grid grid-cols-1 md:grid-cols-2 ${
           gridView ? "lg:grid-cols-3" : "lg:grid-cols-2"
         } gap-5`}
+        data-aos="fade-up"
       >
         {foods.map((food) => (
           <FoodCard key={food._id} food={food}></FoodCard>
