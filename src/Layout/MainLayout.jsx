@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 const MainLayout = () => {
   return (
     <div className="font-poppins">
-      <section className="2xl:w-10/12 mx-auto">
+      <section className="bg-orange-500 opacity-90 sticky top-0 z-50 backdrop-blur-sm">
         <Navbar></Navbar>
       </section>
       <section

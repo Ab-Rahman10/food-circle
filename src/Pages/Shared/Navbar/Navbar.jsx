@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/Context";
 import { FaUser } from "react-icons/fa";
 import logo from "../../../assets/logo.png";
+import { TbLogout } from "react-icons/tb";
 
 const Navbar = () => {
   const { user, logoutUser } = useAuth();
@@ -12,7 +13,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `font-bold border-b-2 border-custom-orange` : ""
+            isActive ? `font-bold border-b-2 border-white/80 duration-500` : ""
           }
           to="/"
         >
@@ -22,7 +23,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `font-bold border-b-2 border-custom-orange` : ""
+            isActive ? `font-bold border-b-2 border-white/80 duration-500` : ""
           }
           to="/available-foods"
         >
@@ -32,7 +33,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `font-bold border-b-2 border-custom-orange` : ""
+            isActive ? `font-bold border-b-2 border-white/80 duration-500` : ""
           }
           to="/aboutUs"
         >
@@ -44,7 +45,9 @@ const Navbar = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? `font-bold border-b-2 border-custom-orange` : ""
+                isActive
+                  ? `font-bold border-b-2 border-white/80 duration-500`
+                  : ""
               }
               to="/add-food"
             >
@@ -54,7 +57,9 @@ const Navbar = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? `font-bold border-b-2 border-custom-orange` : ""
+                isActive
+                  ? `font-bold border-b-2 border-white/80 duration-500`
+                  : ""
               }
               to="/manage-myFoods"
             >
@@ -64,7 +69,9 @@ const Navbar = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? `font-bold border-b-2 border-custom-orange` : ""
+                isActive
+                  ? `font-bold border-b-2 border-white/80 duration-500`
+                  : ""
               }
               to="/myFood-request"
             >
@@ -83,82 +90,85 @@ const Navbar = () => {
       .catch((error) => console.log("ERROR", error));
   };
   return (
-    <div className="navbar bg-base-100">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 z-40"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="">
+      <div className="navbar ">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 z-40 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-50 text-orange-500"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              {/* Links */}
+              {links}
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-50"
-          >
+          <div className="flex items-center gap-2">
+            <Link to="/" className="text-xl">
+              <h2 className="text-xl font-black font-Kavivanar text-white whitespace-nowrap">
+                <span className="font-black text-2xl">F</span>ood Circle
+              </h2>
+            </Link>
+            <div className="w-10">
+              <img src={logo} alt="logo" />
+            </div>
+          </div>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu-horizontal px-1 space-x-8 text-white">
             {/* Links */}
             {links}
           </ul>
         </div>
-        <div className="flex items-center gap-2">
-          <Link to="/" className="text-xl">
-            <h2 className="text-xl font-black font-Kavivanar text-custom-orange whitespace-nowrap">
-              <span className="font-black text-2xl">F</span>ood Circle
-            </h2>
-          </Link>
-          <div className="w-10">
-            <img src={logo} alt="logo" />
+        {user ? (
+          <div className="navbar-end space-x-2">
+            {user && (
+              <img
+                title={user?.displayName}
+                className="w-6 md:w-8 rounded-full"
+                src={user?.photoURL}
+                alt="user"
+              />
+            )}
+            <button
+              onClick={handleSignOut}
+              className="border py-1 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs"
+            >
+              Sign Out{" "}
+              <TbLogout className="inline-flex text-2xl items-center" />
+            </button>
           </div>
-        </div>
+        ) : (
+          <div className="navbar-end space-x-2">
+            <FaUser className="text-xl md:text-2xl text-white"></FaUser>
+            <Link to="/register">
+              <button className="bg-lime-500 py-1.5 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
+                Sign Up
+              </button>
+            </Link>
+            <Link to="/login">
+              <button className="bg-lime-500 py-1.5 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
+                Login
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu-horizontal px-1 space-x-8">
-          {/* Links */}
-          {links}
-        </ul>
-      </div>
-      {user ? (
-        <div className="navbar-end space-x-2">
-          {user && (
-            <img
-              title={user?.displayName}
-              className="w-6 md:w-8 rounded-full"
-              src={user?.photoURL}
-              alt="user"
-            />
-          )}
-          <button
-            onClick={handleSignOut}
-            className="bg-red-500 py-1 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs"
-          >
-            Sign Out
-          </button>
-        </div>
-      ) : (
-        <div className="navbar-end space-x-2">
-          <FaUser className="text-xl md:text-2xl"></FaUser>
-          <Link to="/register">
-            <button className="bg-lime-400 py-1.5 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
-              Sign Up
-            </button>
-          </Link>
-          <Link to="/login">
-            <button className="bg-custom-orange py-1.5 px-2 md:py-2 md:px-5 rounded-md text-white font-semibold text-xs">
-              Login
-            </button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 };
