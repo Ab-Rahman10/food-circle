@@ -11,9 +11,9 @@ const Home = () => {
       <Slider />
       <FeaturedFoods />
       <FoodDiscovery></FoodDiscovery>
-      <Reviews></Reviews>
       <OurImpact></OurImpact>
       <SeasonalFeast></SeasonalFeast>
+      <Reviews></Reviews>
     </div>
   );
 };
