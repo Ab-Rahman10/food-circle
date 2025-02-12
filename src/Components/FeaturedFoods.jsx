@@ -27,9 +27,9 @@ const FeaturedFoods = () => {
   }
 
   return (
-    <div className="w-11/12   lg:w-9/12 mx-auto">
+    <div className="w-11/12 lg:w-9/12 mx-auto">
       <div className="mt-10">
-        <h2 className="text-3xl font-bold text-center ">Featured foods</h2>
+        <h2 className="text-3xl font-bold text-center">Featured foods</h2>
         <p className="text-center text-sm mt-2 text-gray-500">
           Discover our curated selection of featured foods, handpicked for their
           quality, flavor, and freshness. <br className="hidden lg:block" />{" "}
@@ -37,13 +37,13 @@ const FeaturedFoods = () => {
         </p>
       </div>
       <hr className="my-5" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
         {featuredFoods.map((food) => (
           <div
             key={food._id}
-            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2 "
+            className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2"
           >
-            <div className="w-full relative">
+            <div className="w-full relative h-64">
               <img
                 className="w-full h-full object-cover hover:scale-105 transition-all duration-300"
                 src={food.photo}
@@ -65,7 +65,7 @@ const FeaturedFoods = () => {
                   {food.status}
                 </span>
                 <Link to={`/food-details/${food._id}`}>
-                  <button className="py-1 px-2 text-sm bg-orange-500 text-white rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 ">
+                  <button className="py-1 px-2 text-sm bg-orange-500 text-white rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
                     View details
                   </button>
                 </Link>

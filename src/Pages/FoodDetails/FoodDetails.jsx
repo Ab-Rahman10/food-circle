@@ -70,7 +70,7 @@ const FoodDetails = () => {
   };
 
   return (
-    <div className="flex flex-col items-center lg:w-9/12 mx-auto px-4 space-y-4 lg:space-y-0 lg:space-x-4 lg:flex-row gap-5">
+    <div className="flex flex-col items-center lg:w-9/12 mx-auto px-4 space-y-4 lg:space-y-0 lg:space-x-4 lg:flex-row gap-5 my-7">
       {/* Food Card */}
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg overflow-hidden order-1 lg:order-2">
         {/* Image Section */}
