@@ -6,7 +6,7 @@ import logo from "../../../assets/logo.png";
 const Footer = () => {
   return (
     <footer className="bg-white text-gray-700">
-      <div className="container mx-auto px-4 py-8 space-y-8 lg:space-y-0 lg:flex lg:justify-between">
+      <div className=" mx-auto px-4 py-8 space-y-8 lg:space-y-0 lg:flex lg:justify-between">
         {/* Column 1 */}
         <div>
           {/* Logo Section */}
