@@ -9,6 +9,7 @@ const AvailableFoods = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [gridView, setGridView] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchingAvailableFoods = async () => {
@@ -17,8 +18,10 @@ const AvailableFoods = () => {
           `${import.meta.env.VITE_API_URL}/foods?search=${search}&sort=${sort}`
         );
         setFoods(data);
+        setLoading(false);
       } catch (err) {
         // console.log(err.message);
+        setLoading(false); // Even if there's an error, stop loading
       }
     };
 
@@ -29,8 +32,19 @@ const AvailableFoods = () => {
     setSearch("");
     setSort("");
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+        <span className="loading loading-spinner text-secondary"></span>
+        <span className="loading loading-spinner text-accent"></span>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-11/12   lg:w-9/12 mx-auto">
+    <div className="w-11/12 lg:w-9/12 mx-auto">
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-center mt-10">
@@ -56,7 +70,7 @@ const AvailableFoods = () => {
             <input
               onBlur={(e) => setSearch(e.target.value)}
               type="text"
-              className="grow px-4 py-2 rounded-lg border-gray-300 focus:outline-none  focus:border-transparent"
+              className="grow px-4 py-2 rounded-lg border-gray-300 focus:outline-none focus:border-transparent"
               placeholder="Search"
             />
             <svg
