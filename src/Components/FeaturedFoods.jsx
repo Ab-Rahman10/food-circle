@@ -1,10 +1,18 @@
+import { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { BsArrowRight } from "react-icons/bs";
 import { useQuery } from "@tanstack/react-query";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const FeaturedFoods = () => {
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   // Using Tanstack query---------------------------------------------
   const { data: featuredFoods, isLoading } = useQuery({
     queryKey: ["foods"],
@@ -18,7 +26,10 @@ const FeaturedFoods = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div
+        className="flex justify-center items-center min-h-screen"
+        data-aos="fade-in"
+      >
         <span className="loading loading-spinner text-primary"></span>
         <span className="loading loading-spinner text-secondary"></span>
         <span className="loading loading-spinner text-accent"></span>
@@ -27,8 +38,8 @@ const FeaturedFoods = () => {
   }
 
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto">
-      <div className="mt-10">
+    <div className="w-11/12 lg:w-9/12 mx-auto" data-aos="fade-up">
+      <div className="mt-10" data-aos="fade-down">
         <h2 className="text-3xl font-bold text-center">Featured foods</h2>
         <p className="text-center text-sm mt-2 text-gray-500">
           Discover our curated selection of featured foods, handpicked for their
@@ -42,6 +53,7 @@ const FeaturedFoods = () => {
           <div
             key={food._id}
             className="mx-auto bg-white shadow-lg rounded-xl overflow-hidden pb-2"
+            data-aos="fade-up"
           >
             <div className="w-full relative h-64">
               <img
@@ -77,6 +89,7 @@ const FeaturedFoods = () => {
       <Link
         to="/available-foods"
         className="order-2 lg:order-1 flex justify-center mt-3"
+        data-aos="fade-up"
       >
         <button className="px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 flex items-center">
           Available foods <BsArrowRight className="ml-2" />

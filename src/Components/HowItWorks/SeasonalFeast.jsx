@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const SeasonalFeast = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   // Sample data for seasonal dishes
   const featuredDishes = [
     {
@@ -30,9 +36,12 @@ const SeasonalFeast = () => {
   ];
 
   return (
-    <section className="seasonal-feast py-12 bg-gradient-to-tr from-white via-orange-100">
+    <section
+      className="seasonal-feast py-12 bg-gradient-to-tr from-white via-orange-100"
+      data-aos="fade-up"
+    >
       <div className="w-11/12 lg:w-9/12 mx-auto">
-        <div className="text-center">
+        <div className="text-center" data-aos="zoom-in">
           <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
             Seasonal Feast: What's Fresh & Trending
           </h2>
@@ -41,11 +50,15 @@ const SeasonalFeast = () => {
             trending dishes, and seasonal specials picked just for you.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            data-aos="fade-up"
+          >
             {featuredDishes.map((dish) => (
               <div
                 key={dish.id}
                 className="dish-card bg-white shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-all duration-200"
+                data-aos="flip-left"
               >
                 <img
                   src={dish.image}
@@ -59,7 +72,10 @@ const SeasonalFeast = () => {
                   <p className="text-sm text-gray-500 mb-4">
                     {dish.description}
                   </p>
-                  <button className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-700 transition">
+                  <button
+                    className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-700 transition"
+                    data-aos="fade-right"
+                  >
                     View Recipe
                   </button>
                 </div>
@@ -67,7 +83,7 @@ const SeasonalFeast = () => {
             ))}
           </div>
 
-          <div className="mt-8">
+          <div className="mt-8" data-aos="fade-up">
             <Link to="/available-foods">
               <button className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-700 transition">
                 Explore Available Recipes

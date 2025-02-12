@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const OurImpact = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <section className="w-11/12 lg:w-9/12 mx-auto py-12 my-5">
       <div className="max-w-6xl mx-auto text-center">
@@ -10,6 +17,7 @@ const OurImpact = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          data-aos="fade-up"
         >
           Our Impact
         </motion.h2>
@@ -20,6 +28,7 @@ const OurImpact = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
+          data-aos="fade-up"
         >
           We're proud to be part of a community that helps those in need. Here’s
           a look at the difference we’re making together.
@@ -32,6 +41,7 @@ const OurImpact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
+            data-aos="zoom-in"
           >
             <h3 className="text-2xl font-semibold text-green-700 mb-4">
               1000+
@@ -44,6 +54,7 @@ const OurImpact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.5 }}
+            data-aos="zoom-in"
           >
             <h3 className="text-2xl font-semibold text-green-700 mb-4">500+</h3>
             <p className="text-gray-700">Beneficiaries Served</p>
@@ -54,6 +65,7 @@ const OurImpact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
+            data-aos="zoom-in"
           >
             <h3 className="text-2xl font-semibold text-green-700 mb-4">200+</h3>
             <p className="text-gray-700">Generous Donators</p>
@@ -66,6 +78,7 @@ const OurImpact = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.5 }}
+          data-aos="fade-up"
         >
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
             Join the Movement
@@ -77,6 +90,7 @@ const OurImpact = () => {
           <a
             href="#"
             className="inline-block px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition duration-300"
+            data-aos="flip-up"
           >
             Donate Now
           </a>
