@@ -12,11 +12,28 @@ import auth from "../firebase/Firebase.config";
 import axios from "axios";
 
 export const AuthContext = createContext();
-
+export const ThemeContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const googleProvider = new GoogleAuthProvider();
+  console.log(isDarkMode);
+
+  // Dark mode toggle
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("isDarkMode", JSON.stringify(newMode));
+  };
+
+  // Load theme from localStorage
+  useEffect(() => {
+    const savedDarkMode = JSON.parse(localStorage.getItem("isDarkMode"));
+    if (savedDarkMode !== null) {
+      setIsDarkMode(savedDarkMode);
+    }
+  }, []);
 
   //   create user
   const createUser = (email, password) => {
@@ -93,7 +110,9 @@ const AuthProvider = ({ children }) => {
     userProfileUpdate,
   };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+      <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "../../Hooks/Context";
@@ -7,11 +7,13 @@ import { compareAsc, format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ThemeContext } from "../../Provider/AuthProvider";
 
 const AddFood = () => {
   const axiosSecure = UseAxiosSecure();
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
+  const { isDarkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   // Tanstack mutation
@@ -67,119 +69,203 @@ const AddFood = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white border rounded-lg shadow-md">
-      <h2 className="text-xl font-bold text-orange-500 mb-6 text-center">
-        Add Food
-      </h2>
-      <form onSubmit={handleFoodSubmit} className="space-y-6">
-        {/* Food Details Section */}
-        <div className="p-4 border rounded-md">
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Food Details
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm text-gray-700">Food Name</label>
-              <input
-                name="foodName"
-                type="text"
-                placeholder="Enter food name"
-                required
-                className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm text-gray-700">Food Image</label>
-              <input
-                name="foodPhoto"
-                type="url"
-                placeholder="Image URL"
-                required
-                className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm text-gray-700">Quantity</label>
-              <input
-                name="foodQuantity"
-                type="number"
-                placeholder="Quantity"
-                required
-                className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm text-gray-700">
-                Donator Email
-              </label>
-              <input
-                readOnly
-                defaultValue={user?.email}
-                name="donatorEmail"
-                type="email"
-                placeholder="Enter donator email"
-                className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Pickup Details Section */}
-        <div className="p-4 border rounded-md">
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Pickup Details
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm text-gray-700">
-                Pickup Location
-              </label>
-              <input
-                name="location"
-                type="text"
-                placeholder="Enter pickup location"
-                required
-                className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm text-gray-700">
-                Expiration Date
-              </label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(format(new Date(date), "P"))}
-                required
-                className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Additional Info Section */}
-        <div className="p-4 border rounded-md">
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Additional Info
-          </h3>
-          <label className="block text-sm text-gray-700">Notes</label>
-          <textarea
-            name="notes"
-            placeholder="Add any additional notes"
-            required
-            className="mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500"
-          />
-        </div>
-
-        {/* Submit Button */}
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="px-5 py-2 bg-orange-500 text-white font-medium rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+    <div className={`py-20 ${isDarkMode && "bg-gray-950"}`}>
+      <div
+        className={`max-w-2xl mx-auto p-6 border rounded-lg shadow-md ${
+          isDarkMode ? "bg-gray-950 text-white" : "bg-white text-black"
+        }`}
+      >
+        <h2
+          className={`text-xl font-bold ${
+            isDarkMode ? "text-orange-500" : "text-orange-500"
+          } mb-6 text-center`}
+        >
+          Add Food
+        </h2>
+        <form onSubmit={handleFoodSubmit} className="space-y-6">
+          {/* Food Details Section */}
+          <div
+            className={`p-4 border rounded-md ${
+              isDarkMode ? "bg-gray-800 text-white" : ""
+            }`}
           >
-            {isPending ? "Save..." : "Save"}
-          </button>
-        </div>
-      </form>
+            <h3
+              className={`text-lg font-semibold ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              } mb-4`}
+            >
+              Food Details
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  className={`block text-sm ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  Food Name
+                </label>
+                <input
+                  name="foodName"
+                  type="text"
+                  placeholder="Enter food name"
+                  required
+                  className={`mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500 ${
+                    isDarkMode ? "bg-gray-700 text-white" : ""
+                  }`}
+                />
+              </div>
+              <div>
+                <label
+                  className={`block text-sm ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  Food Image
+                </label>
+                <input
+                  name="foodPhoto"
+                  type="url"
+                  placeholder="Image URL"
+                  required
+                  className={`mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500 ${
+                    isDarkMode ? "bg-gray-700 text-white" : ""
+                  }`}
+                />
+              </div>
+              <div>
+                <label
+                  className={`block text-sm ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  Quantity
+                </label>
+                <input
+                  name="foodQuantity"
+                  type="number"
+                  placeholder="Quantity"
+                  required
+                  className={`mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500 ${
+                    isDarkMode ? "bg-gray-700 text-white" : ""
+                  }`}
+                />
+              </div>
+              <div>
+                <label
+                  className={`block text-sm ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  Donator Email
+                </label>
+                <input
+                  readOnly
+                  defaultValue={user?.email}
+                  name="donatorEmail"
+                  type="email"
+                  placeholder="Enter donator email"
+                  className={`mt-1 w-full px-4 py-2 border rounded-md focus:ring-orange-500 focus:border-orange-500 ${
+                    isDarkMode ? "bg-gray-700 text-white" : ""
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Pickup Details Section */}
+          <div
+            className={`p-4 border rounded-md ${
+              isDarkMode ? "bg-gray-800 text-white" : ""
+            }`}
+          >
+            <h3
+              className={`text-lg font-semibold ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              } mb-4`}
+            >
+              Pickup Details
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  className={`block text-sm ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  Pickup Location
+                </label>
+                <input
+                  name="location"
+                  type="text"
+                  placeholder="Enter pickup location"
+                  required
+                  className={`mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500 ${
+                    isDarkMode ? "bg-gray-700 text-white" : ""
+                  }`}
+                />
+              </div>
+              <div>
+                <label
+                  className={`block text-sm ${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  }`}
+                >
+                  Expiration Date
+                </label>
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(format(new Date(date), "P"))}
+                  required
+                  className={`mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500 ${
+                    isDarkMode ? "bg-gray-700 text-white" : ""
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Info Section */}
+          <div
+            className={`p-4 border rounded-md ${
+              isDarkMode ? "bg-gray-800 text-white" : ""
+            }`}
+          >
+            <h3
+              className={`text-lg font-semibold ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              } mb-4`}
+            >
+              Additional Info
+            </h3>
+            <label
+              className={`block text-sm ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Notes
+            </label>
+            <textarea
+              name="notes"
+              placeholder="Add any additional notes"
+              required
+              className={`mt-1 w-full px-3 py-2 border rounded focus:ring-orange-500 focus:border-orange-500 ${
+                isDarkMode ? "bg-gray-700 text-white" : ""
+              }`}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="px-5 py-2 bg-orange-500 text-white font-medium rounded hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            >
+              {isPending ? "Save..." : "Save"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

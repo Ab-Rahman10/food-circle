@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ThemeContext } from "../../Provider/AuthProvider";
 
 const reviewsData = [
   {
@@ -78,15 +79,21 @@ const reviewsData = [
 ];
 
 const Reviews = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section
+      className={`pt-24 pb-32 ${isDarkMode ? "bg-gray-950" : "bg-gray-50"}`}
+    >
       <div className="container mx-auto px-4">
         <h2
-          className="text-3xl md:text-4xl font-bold text-center mb-8"
+          className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
+            isDarkMode ? "text-gray-100" : "text-gray-800"
+          }`}
           data-aos="fade-down"
         >
           Customer Reviews
@@ -95,7 +102,9 @@ const Reviews = () => {
           {reviewsData.map((review) => (
             <div
               key={review.id}
-              className="bg-white p-6 rounded-lg shadow-md"
+              className={`p-6 rounded-lg shadow-md ${
+                isDarkMode ? "bg-gray-800" : "bg-white"
+              }`}
               data-aos="fade-up"
             >
               <div className="flex items-center mb-4">
@@ -103,7 +112,11 @@ const Reviews = () => {
                   {review.name.charAt(0)}
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-xl font-semibold text-gray-800">
+                  <h3
+                    className={`text-xl font-semibold ${
+                      isDarkMode ? "text-gray-100" : "text-gray-800"
+                    }`}
+                  >
                     {review.name}
                   </h3>
                   <div className="flex">
@@ -120,7 +133,11 @@ const Reviews = () => {
                   </div>
                 </div>
               </div>
-              <p className="text-gray-600">{review.text}</p>
+              <p
+                className={`${isDarkMode ? "text-gray-300" : "text-gray-600"}`}
+              >
+                {review.text}
+              </p>
             </div>
           ))}
         </div>

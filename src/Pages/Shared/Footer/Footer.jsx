@@ -2,11 +2,20 @@ import { Link } from "react-router-dom";
 import spoonLottieData from "../../../assets/lottie/spoon.json";
 import Lottie from "lottie-react";
 import logo from "../../../assets/logo.png";
+import { useContext } from "react";
+import { ThemeContext } from "../../../Provider/AuthProvider";
+import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   return (
-    <footer className="bg-white text-gray-700">
-      <div className=" mx-auto px-4 py-8 space-y-8 lg:space-y-0 lg:flex lg:justify-between">
+    <footer
+      className={`${
+        isDarkMode ? "bg-gray-950 text-gray-100" : "bg-white text-gray-700"
+      }`}
+    >
+      <div className="mx-auto px-4 py-8 space-y-8 lg:space-y-0 lg:flex lg:justify-between">
         {/* Column 1 */}
         <div>
           {/* Logo Section */}
@@ -86,7 +95,7 @@ const Footer = () => {
         {/* Column 4 */}
         <div>
           <h3 className="text-lg font-bold text-orange-500 mb-2">Follow Us</h3>
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-4">
             <Link
               target="_blank"
               to="https://www.facebook.com/ab.rahman.253080/"
@@ -95,19 +104,15 @@ const Footer = () => {
               <img
                 src="https://img.icons8.com/?size=48&id=uLWV5A9vXIPu&format=png"
                 alt="Facebook"
-                className="h-6 w-6 text-orange-500"
+                className="h-6 w-6"
               />
             </Link>
             <Link
               target="_blank"
               to="https://github.com/Ab-Rahman10"
-              className="hover:scale-110 transition-transform"
+              className="hover:scale-110 transition-transform text-[22px]"
             >
-              <img
-                src="https://img.icons8.com/?size=64&id=3tC9EQumUAuq&format=png"
-                alt="Twitter"
-                className="h-6 w-6 text-orange-500"
-              />
+              <FaGithub />
             </Link>
             <Link
               target="_blank"
@@ -117,7 +122,7 @@ const Footer = () => {
               <img
                 src="https://img.icons8.com/?size=48&id=32323&format=png"
                 alt="Instagram"
-                className="h-6 w-6 text-orange-500"
+                className="h-6 w-6"
               />
             </Link>
           </div>

@@ -31,7 +31,7 @@ const Slider = () => {
           <img className="w-full md:h-[550px] h-96 object-cover" src={slide1} />
           <div className="bg-black/75 absolute inset-0 z-10"></div>
           <div className="absolute top-[20%] left-[5%] md:left-[15%] z-20">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white mb-1">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white/90 mb-1">
               Freshly Prepared Dish
             </h3>
             <p className="text-gray-100 mb-2">
@@ -56,7 +56,7 @@ const Slider = () => {
           <img className="w-full md:h-[550px] h-96 object-cover" src={slide2} />
           <div className="bg-black/75 absolute inset-0 z-10"></div>
           <div className="absolute top-[20%] left-[5%] md:left-[15%] z-20">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white mb-1">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white/90 mb-1">
               Nutritious Meal
             </h3>
             <p className="text-gray-100 mb-2">
@@ -79,7 +79,7 @@ const Slider = () => {
           <img className="w-full md:h-[550px] h-96 object-cover" src={slide3} />
           <div className="bg-black/75 absolute inset-0 z-10"></div>
           <div className="absolute top-[20%] left-[5%] md:left-[15%] z-20">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white mb-1">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white/90 mb-1">
               Food Being Donated
             </h3>
             <p className="text-gray-100 mb-2">
@@ -102,7 +102,7 @@ const Slider = () => {
           <img className="w-full md:h-[550px] h-96 object-cover" src={slide4} />
           <div className="bg-black/75 absolute inset-0 z-10"></div>
           <div className="absolute top-[20%] left-[5%] md:left-[15%] z-20">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white mb-1">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-CinzelDecorative text-white/90 mb-1">
               Food Being Shared in a Community
             </h3>
             <p className="text-gray-100 mb-2">

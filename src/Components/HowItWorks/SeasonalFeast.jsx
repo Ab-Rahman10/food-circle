@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ThemeContext } from "../../Provider/AuthProvider";
 
 const SeasonalFeast = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -37,15 +40,27 @@ const SeasonalFeast = () => {
 
   return (
     <section
-      className="seasonal-feast py-12 bg-gradient-to-tr from-white via-orange-100"
+      className={`seasonal-feast  ${
+        isDarkMode
+          ? "bg-gray-950"
+          : "bg-gradient-to-tr from-white via-orange-100"
+      }`}
       data-aos="fade-up"
     >
-      <div className="w-11/12 lg:w-9/12 mx-auto">
+      <div className="w-11/12 lg:w-9/12 mx-auto py-8">
         <div className="text-center" data-aos="zoom-in">
-          <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+          <h2
+            className={`text-3xl font-extrabold mb-4 ${
+              isDarkMode ? "text-white/90" : "text-gray-800"
+            }`}
+          >
             Seasonal Feast: What's Fresh & Trending
           </h2>
-          <p className="text-lg text-gray-600 mb-10">
+          <p
+            className={`text-lg mb-10 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
             Explore the flavors of the season! Discover fresh ingredients,
             trending dishes, and seasonal specials picked just for you.
           </p>
@@ -57,7 +72,9 @@ const SeasonalFeast = () => {
             {featuredDishes.map((dish) => (
               <div
                 key={dish.id}
-                className="dish-card bg-white shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-all duration-200"
+                className={`dish-card ${
+                  isDarkMode ? "bg-gray-800" : "bg-white"
+                } shadow-xl rounded-lg overflow-hidden hover:scale-105 transition-all duration-200`}
                 data-aos="flip-left"
               >
                 <img
@@ -66,10 +83,18 @@ const SeasonalFeast = () => {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
-                  <h3 className="text-xl font-bold text-gray-700 mb-2">
+                  <h3
+                    className={`text-xl font-bold mb-2 ${
+                      isDarkMode ? "text-gray-100" : "text-gray-700"
+                    }`}
+                  >
                     {dish.name}
                   </h3>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p
+                    className={`text-sm mb-4 ${
+                      isDarkMode ? "text-gray-400" : "text-gray-500"
+                    }`}
+                  >
                     {dish.description}
                   </p>
                   <button

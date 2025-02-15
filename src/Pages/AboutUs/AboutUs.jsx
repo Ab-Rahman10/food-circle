@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { ThemeContext } from "../../Provider/AuthProvider";
 
 const AboutUs = () => {
+  const { isDarkMode } = useContext(ThemeContext);
   return (
-    <section className="bg-orange-50 py-16">
+    <section className={`${isDarkMode ? "bg-gray-950" : "bg-orange-50"} py-16`}>
       <div className="container mx-auto px-6 text-center">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-orange-500 mb-8"
@@ -15,7 +17,9 @@ const AboutUs = () => {
         </motion.h2>
 
         <motion.p
-          className="text-lg md:text-xl text-gray-700 mb-12"
+          className={`${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+          } text-lg md:text-xl mb-12`}
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
@@ -43,7 +47,11 @@ const AboutUs = () => {
           <h3 className="text-2xl font-bold text-orange-500 mb-4">
             Our Mission
           </h3>
-          <p className="text-lg md:text-xl text-gray-700">
+          <p
+            className={`${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
+            } text-lg md:text-xl`}
+          >
             At Food Circle, our mission is to bring people together by providing
             access to fresh, local food. We work directly with local vendors to
             showcase their products, ensuring that every meal is not only
@@ -60,7 +68,11 @@ const AboutUs = () => {
           <h3 className="text-2xl font-bold text-orange-500 mb-4">
             What We Offer
           </h3>
-          <p className="text-lg md:text-xl text-gray-700">
+          <p
+            className={`${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
+            } text-lg md:text-xl`}
+          >
             Food Circle provides a wide range of options for food lovers.
             Whether you're looking for breakfast, lunch, dinner, or snacks, we
             have something for everyone. Our platform is easy to navigate, and
@@ -78,7 +90,11 @@ const AboutUs = () => {
           <h3 className="text-2xl font-bold text-orange-500 mb-4">
             Why Choose Us?
           </h3>
-          <p className="text-lg md:text-xl text-gray-700">
+          <p
+            className={`${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
+            } text-lg md:text-xl`}
+          >
             - **Fresh Ingredients**: All food items are made with fresh, locally
             sourced ingredients. - **Support Local Businesses**: By choosing
             Food Circle, you help promote local food vendors. - **Seamless
@@ -98,7 +114,11 @@ const AboutUs = () => {
           <h3 className="text-2xl font-bold text-orange-500 mb-4">
             Our Community
           </h3>
-          <p className="text-lg md:text-xl text-gray-700">
+          <p
+            className={`${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
+            } text-lg md:text-xl`}
+          >
             Food Circle is more than just a platform for food delivery. It's a
             community of passionate food lovers, home cooks, and local chefs.
             Our mission is to build lasting relationships between food
@@ -116,7 +136,11 @@ const AboutUs = () => {
           <h3 className="text-2xl font-bold text-orange-500 mb-4">
             Join the Food Circle
           </h3>
-          <p className="text-lg md:text-xl text-gray-700">
+          <p
+            className={`${
+              isDarkMode ? "text-gray-300" : "text-gray-700"
+            } text-lg md:text-xl`}
+          >
             Ready to explore a world of flavors? Join the Food Circle today and
             start discovering delicious food from local vendors. Whether you're
             looking for a quick snack or a full meal, we have everything you

@@ -1,17 +1,42 @@
+import { useContext, useEffect } from "react";
 import { motion } from "motion/react";
 import { RxTransparencyGrid } from "react-icons/rx";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { ThemeContext } from "../../Provider/AuthProvider";
 
 const FoodDiscovery = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
-    <div className="bg-gradient-to-tr from-white via-orange-100 mt-10">
+    <div
+      className={`${
+        isDarkMode
+          ? "bg-gray-950"
+          : "bg-gradient-to-tr from-white via-orange-100"
+      } `}
+    >
       <div className="w-11/12 lg:w-9/12 mx-auto">
         <section className="flex flex-col lg:flex-row gap-14 lg:gap-72 items-center justify-between py-10">
           {/* Left Content */}
           <div className="space-y-4 text-center md:text-left flex-1">
-            <h2 className="text-4xl font-bold text-gray-800">
+            <h2
+              className={`text-4xl font-bold ${
+                isDarkMode ? "text-white/90" : "text-gray-800"
+              }`}
+            >
               Discover the Joy of Food
             </h2>
-            <p className="text-gray-600 text-lg">
+            <p
+              className={`text-lg ${
+                isDarkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
               At Food Circle, we bring people together through the love of food.
               Explore our curated selection of dishes and dive into a culinary
               experience like no other. Let's make every meal a celebration!
@@ -30,6 +55,7 @@ const FoodDiscovery = () => {
               <img
                 className="w-48 h-28 object-cover rounded-tl-3xl rounded-tr-3xl rounded-br-3xl border-b-4 border-l-4 border-blue-500"
                 src="https://i.ibb.co.com/0JYkJTT/pexels-photo-376464.jpg"
+                alt="Food 1"
               />
             </motion.div>
             <div className="flex items-center">
@@ -40,6 +66,7 @@ const FoodDiscovery = () => {
                 <img
                   className="w-48 h-28 object-cover rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl border-b-4 border-r-4 border-blue-500"
                   src="https://i.ibb.co.com/3BdbZMq/pexels-photo-5840079.jpg"
+                  alt="Food 2"
                 />
               </motion.div>
               <motion.div
@@ -47,8 +74,7 @@ const FoodDiscovery = () => {
                 transition={{ duration: 5, delay: 2, repeat: Infinity }}
                 className="text-5xl text-blue-600"
               >
-                {" "}
-                <RxTransparencyGrid />{" "}
+                <RxTransparencyGrid />
               </motion.div>
             </div>
             <motion.div
@@ -58,6 +84,7 @@ const FoodDiscovery = () => {
               <img
                 className="w-48 h-28 object-cover rounded-tl-3xl rounded-tr-3xl rounded-br-3xl border-b-4 border-l-4 border-blue-500"
                 src="https://i.ibb.co.com/TLFrBWg/pexels-photo-958545.jpg"
+                alt="Food 3"
               />
             </motion.div>
           </div>

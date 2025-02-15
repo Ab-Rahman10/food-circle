@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Pages/Shared/Footer/Footer";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { ThemeContext } from "../Provider/AuthProvider";
 const MainLayout = () => {
+  const { isDarkMode } = useContext(ThemeContext);
   return (
     <div className="font-poppins">
-      <section className="bg-orange-500 opacity-90 sticky top-0 z-50 backdrop-blur-sm">
+      <section
+        className={`${
+          isDarkMode ? "bg-gray-950" : "bg-orange-500"
+        }   sticky top-0 z-50 backdrop-blur-sm`}
+      >
         <Navbar></Navbar>
       </section>
       <section
